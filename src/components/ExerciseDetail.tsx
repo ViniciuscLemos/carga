@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
-import { displayName, imageUrl, loadExercises, type Exercise } from '../lib/exercises';
+import { displayName, imageUrl, loadExercises, similar, type Exercise } from '../lib/exercises';
 import { EQUIPMENT, MECHANICS, MUSCLES } from '../lib/labels';
 
 export function ExerciseDetail({ id }: { id: string }) {
   const [exercise, setExercise] = useState<Exercise | null | undefined>(undefined);
+  const [others, setOthers] = useState<Exercise[]>([]);
 
   useEffect(() => {
-    loadExercises().then((all) => setExercise(all.find((e) => e.id === id) ?? null));
+    loadExercises().then((all) => {
+      const found = all.find((e) => e.id === id) ?? null;
+      setExercise(found);
+      setOthers(found ? similar(all, found) : []);
+    });
   }, [id]);
 
   if (exercise === undefined) return <p className="muted">Carregando…</p>;
@@ -55,6 +60,25 @@ export function ExerciseDetail({ id }: { id: string }) {
           <li key={step}>{step}</li>
         ))}
       </ol>
+
+      {others.length > 0 && (
+        <>
+          <h3 className="similar-title">Parecidos</h3>
+          <ul className="list">
+            {others.map((e) => (
+              <li key={e.id}>
+                <a className="item" href={`#/exercicio/${e.id}`}>
+                  <img src={imageUrl(e.images[0])} alt="" loading="lazy" width={64} height={64} />
+                  <span>
+                    <strong>{displayName(e)}</strong>
+                    <em>{EQUIPMENT[e.equipment]}</em>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </article>
   );
 }

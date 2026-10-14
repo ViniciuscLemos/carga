@@ -55,3 +55,15 @@ export function search(all: Exercise[], filters: Filters): Exercise[] {
   // the well-known ones (with a Portuguese name) first, then alphabetical
   return found.sort((a, b) => Number(!a.pt) - Number(!b.pt) || displayName(a).localeCompare(displayName(b), 'pt'));
 }
+
+/** Other exercises for the same main muscle, the same equipment first: for when the machine is taken. */
+export function similar(all: Exercise[], exercise: Exercise, limit = 6): Exercise[] {
+  const main = exercise.primary[0];
+  return all
+    .filter((e) => e.id !== exercise.id && e.primary[0] === main)
+    .sort((a, b) =>
+      Number(b.equipment === exercise.equipment) - Number(a.equipment === exercise.equipment)
+      || Number(!a.pt) - Number(!b.pt)
+      || displayName(a).localeCompare(displayName(b), 'pt'))
+    .slice(0, limit);
+}

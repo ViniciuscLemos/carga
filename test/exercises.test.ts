@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import data from '../src/data/exercises.json';
-import { normalize, search, type Exercise } from '../src/lib/exercises';
+import { normalize, search, similar, type Exercise } from '../src/lib/exercises';
 import { EQUIPMENT, MUSCLES } from '../src/lib/labels';
 
 const all = data as Exercise[];
@@ -50,5 +50,15 @@ describe('data', () => {
 
   it('every exercise has its two drawings', () => {
     expect(all.filter((e) => e.images.length !== 2)).toEqual([]);
+  });
+});
+
+describe('similar', () => {
+  it('suggests other exercises for the same muscle, same equipment first', () => {
+    const bench = all.find((e) => e.id === 'bench-press')!;
+    const found = similar(all, bench);
+    expect(found.length).toBe(6);
+    expect(found.every((e) => e.primary[0] === 'chest' && e.id !== 'bench-press')).toBe(true);
+    expect(found[0].equipment).toBe('barbell');
   });
 });

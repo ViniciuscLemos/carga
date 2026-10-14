@@ -82,6 +82,7 @@ main { max-width: 680px; margin: 0 auto; padding: 0 16px 40px; }
 .detail h3 { font-size: 17px; margin: 0 0 6px; }
 .steps { padding-left: 20px; color: #cfcfcf; margin: 0; }
 .steps li { margin-bottom: 8px; }
+.similar-title { margin-top: 26px !important; }
 
 .studies h2 { margin: 18px 0 4px; font-size: 26px; letter-spacing: -0.4px; }
 .studies h3 { margin: 28px 0 0; font-size: 17px; }
