@@ -26,7 +26,7 @@ export interface LoggedSet {
   doneAt: number;
 }
 
-export const db = new Dexie('carga') as Dexie & {
+export const db = new Dexie('overlog') as Dexie & {
   routines: EntityTable<Routine, 'id'>;
   workouts: EntityTable<Workout, 'id'>;
   sets: EntityTable<LoggedSet, 'id'>;

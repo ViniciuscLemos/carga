@@ -26,7 +26,7 @@ export default function App() {
   return (
     <>
       <header className="top">
-        <a href="#/" className="logo">Carga</a>
+        <a href="#/" className="logo">Overlog</a>
         <nav>
           <a href="#/" aria-current={exercise ? undefined : 'page'}>Exercícios</a>
           <span className="soon" title="Na próxima etapa">Treinos</span>

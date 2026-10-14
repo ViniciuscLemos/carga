@@ -4,16 +4,16 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  // served from github.com/ViniciuscLemos/carga's Pages, under /carga/
-  base: '/carga/',
+  // served from github.com/ViniciuscLemos/overlog's Pages, under /overlog/
+  base: '/overlog/',
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['icon.svg'],
       manifest: {
-        name: 'Carga',
-        short_name: 'Carga',
+        name: 'Overlog',
+        short_name: 'Overlog',
         description: 'Anote cargas e repetições, monte treinos e veja como fazer cada exercício.',
         lang: 'pt-BR',
         theme_color: '#0f1216',

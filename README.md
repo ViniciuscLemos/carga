@@ -1,10 +1,10 @@
-# Carga
+# Overlog
 
-[![Tests and deploy](https://github.com/ViniciuscLemos/carga/actions/workflows/deploy.yml/badge.svg)](https://github.com/ViniciuscLemos/carga/actions/workflows/deploy.yml)
+[![Tests and deploy](https://github.com/ViniciuscLemos/overlog/actions/workflows/deploy.yml/badge.svg)](https://github.com/ViniciuscLemos/overlog/actions/workflows/deploy.yml)
 
-A gym log for my phone: pick exercises, see how each one is done, and (soon) build workouts and log weight and reps with a rest timer. The name is Portuguese for "load", the word everyone at a Brazilian gym uses for the weight on the bar.
+A gym log built around the two things that make muscle grow: training close to failure and putting more weight on the bar over time. The name is *progressive overload* + *log*.
 
-**Live:** https://viniciusclemos.github.io/carga/ (on the phone, "Add to Home Screen" installs it)
+**Live:** https://viniciusclemos.github.io/overlog/ (on the phone, "Add to Home Screen" installs it)
 
 <p>
   <img src="docs/library.png" alt="The exercise list with search, equipment filters and a drawing of each exercise" width="300">
@@ -25,10 +25,17 @@ I train and I log my sets, and I wanted an app that does exactly what I use, in 
 
 ## Next
 
-1. Workouts: as many exercises as you want, sets with weight and reps, a rest time for each exercise.
-2. Logging a workout: last time's numbers next to each set, and the rest timer starts when a set is checked off.
-3. History, personal records and a chart per exercise.
-4. Your own exercises, and export/import so a phone change doesn't lose anything.
+The base first, nothing fancy:
+
+1. **Workouts, as many as you want.** Hevy's free plan stops at 4 routines, which rules out an ABCDE split or upper/lower six days a week. Here there's no limit.
+2. **Logging a workout.** Weight, reps and **RIR** (reps in reserve) on every set, with last time's numbers next to it. Proximity to failure and load progression are what drive hypertrophy, so both are first-class fields, not settings buried in a menu.
+3. **A clear next step per exercise:** add weight, or keep it and go for more reps, based on what you did and how close to failure it was.
+4. **History and a chart per exercise** to see the load actually going up.
+5. Rest timer, your own exercises, export/import.
+
+**More exercises, same look.** Everkinetic has 269 drawn exercises. The rest of a normal gym (wide-grip pulldown, hip thrust, Bulgarian split squat...) will come in as well, shown with a black-and-white muscle map in the same line style, so every picture in the app looks like it belongs.
+
+No points, badges or streaks: open it, train, write it down.
 
 Everything stays on the phone (IndexedDB), so there's no login for now.
 
