@@ -28,7 +28,19 @@ export default function App() {
   return (
     <>
       <header className="top">
-        <a href="#/" className="logo">Overlog</a>
+        <a href="#/" className="logo">
+          {/* the dumbbell going up: the weight on the bar going up over time */}
+          <svg viewBox="0 0 512 512" width="26" height="26" aria-hidden="true">
+            <g fill="currentColor" transform="rotate(-30 256 256)">
+              <rect x="86" y="196" width="34" height="120" rx="8" />
+              <rect x="124" y="160" width="46" height="192" rx="10" />
+              <rect x="170" y="238" width="172" height="36" rx="6" />
+              <rect x="342" y="160" width="46" height="192" rx="10" />
+              <rect x="392" y="196" width="34" height="120" rx="8" />
+            </g>
+          </svg>
+          Overlog
+        </a>
         <nav>
           <a href="#/" aria-current={exercise || studies ? undefined : 'page'}>Exercícios</a>
           <span className="soon" title="Na próxima etapa">Treinos</span>

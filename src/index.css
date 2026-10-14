@@ -23,11 +23,11 @@ main { max-width: 680px; margin: 0 auto; padding: 0 16px 40px; }
 
 .top {
   position: sticky; top: 0; z-index: 2;
-  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
   max-width: 680px; margin: 0 auto; padding: 14px 16px 10px;
   background: var(--bg); border-bottom: 1px solid var(--line);
 }
-.logo { font-weight: 900; font-size: 22px; letter-spacing: -0.8px; text-decoration: none; color: var(--strong); }
+.logo { display: inline-flex; align-items: center; gap: 6px; font-weight: 900; font-size: 22px; letter-spacing: -0.8px; text-decoration: none; color: var(--strong); }
 .top nav { display: flex; gap: 16px; font-size: 15px; }
 .top nav a { text-decoration: none; color: var(--muted); }
 .top nav a[aria-current] { color: var(--strong); }
