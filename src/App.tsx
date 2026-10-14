@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ExerciseDetail } from './components/ExerciseDetail';
 import { Library } from './components/Library';
+import { Studies } from './components/Studies';
 import type { Filters } from './lib/exercises';
 
 // a hash router is enough here and works the same installed or in a tab
@@ -22,19 +23,22 @@ export default function App() {
   // kept here so going back from an exercise keeps the search
   const [filters, setFilters] = useState<Filters>({ text: '', equipment: null, muscle: null });
   const exercise = route.match(/^exercicio\/(.+)$/);
+  const studies = route === 'estudos';
 
   return (
     <>
       <header className="top">
         <a href="#/" className="logo">Overlog</a>
         <nav>
-          <a href="#/" aria-current={exercise ? undefined : 'page'}>Exercícios</a>
+          <a href="#/" aria-current={exercise || studies ? undefined : 'page'}>Exercícios</a>
           <span className="soon" title="Na próxima etapa">Treinos</span>
-          <span className="soon" title="Na próxima etapa">Histórico</span>
+          <a href="#/estudos" aria-current={studies ? 'page' : undefined}>Estudos</a>
         </nav>
       </header>
       <main>
-        {exercise ? (
+        {studies ? (
+          <Studies />
+        ) : exercise ? (
           <ExerciseDetail id={decodeURIComponent(exercise[1])} />
         ) : (
           <Library filters={filters} onFilters={setFilters} />

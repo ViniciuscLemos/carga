@@ -21,6 +21,7 @@ I train and I log my sets, and I wanted an app that does exactly what I use, in 
 - **The names people actually use in Brazilian gyms** for the common ones (supino reto, puxada com triângulo, remada cavalinho, cadeira extensora...), with the English name under it.
 - **Search that forgives**: no accents needed, words in any order, Portuguese or English ("supino halteres" or "dumbbell bench").
 - **Filters** by equipment (barbell, dumbbell, cable, machine, Smith...) and muscle.
+- **A Studies tab**: the research behind the app (proximity to failure, progression, volume, frequency, rest, lengthened positions, protein), summarized in Portuguese with a link to each paper. Every DOI was checked against Crossref.
 - **Works offline** as an installable PWA. The gym has bad signal, so every drawing you open stays on the phone.
 
 ## Next
