@@ -40,6 +40,12 @@ function equipment(list, title) {
   return 'body only';
 }
 
+// mistakes in the source, found while using the app
+const FIXES = {
+  // a row, tagged as chest in the source
+  'body-row': { primary: ['lats', 'middle back'], secondary: ['biceps'], equipment: 'body only' },
+};
+
 const exercises = source
   .filter((e) => pngs.has(`${e.id_num}-relaxation.png`) && pngs.has(`${e.id_num}-tension.png`))
   .map((e) => ({
@@ -54,6 +60,7 @@ const exercises = source
     // start and end of the movement
     images: [`${e.id_num}-relaxation.png`, `${e.id_num}-tension.png`],
   }))
+  .map((e) => ({ ...e, ...FIXES[e.id] }))
   .filter((e) => e.primary.length);
 
 const missing = Object.keys(namesPt).filter((id) => !exercises.some((e) => e.id === id));
