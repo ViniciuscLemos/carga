@@ -18,7 +18,7 @@ export function ExerciseDetail({ id }: { id: string }) {
     <article className="detail">
       <a className="back" href="#/">‹ Exercícios</a>
       <h2>{displayName(exercise)}</h2>
-      {exercise.pt && <p className="muted">{exercise.en}</p>}
+      {exercise.pt && <p className="en">{exercise.en}</p>}
 
       {/* the two drawings are the start and the end of the movement */}
       <div className="photos">

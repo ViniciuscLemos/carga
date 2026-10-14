@@ -8,12 +8,10 @@ export function Studies() {
     <section className="studies">
       <h2>Estudos</h2>
       <p className="intro">
-        O que faz o músculo crescer não é segredo de academia: está em pesquisa publicada. Aqui ficam os
-        estudos por trás do app, resumidos em português, com o link para o original. Vale ler.
+        Os estudos que eu uso de base pro app, resumidos. Cada um tem o link pro artigo, se quiser ler inteiro.
       </p>
-      <p className="muted small">
-        <strong>Meta-análise</strong> junta os resultados de vários estudos sobre o mesmo tema, por isso pesa mais que
-        um estudo sozinho. Os resumos simplificam: a conclusão completa está no artigo.
+      <p className="muted">
+        Meta-análise é quando juntam vários estudos sobre o mesmo assunto e analisam tudo junto.
       </p>
 
       {topics.map((topic) => (
@@ -27,7 +25,7 @@ export function Studies() {
                 {s.authors} ({s.year}). <em>{s.title}</em>. {s.journal}.
               </p>
               <a className="read" href={`https://doi.org/${s.doi}`} target="_blank" rel="noopener noreferrer">
-                Ler o estudo ↗
+                Abrir o artigo
               </a>
             </article>
           ))}

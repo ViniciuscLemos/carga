@@ -26,9 +26,9 @@ export const STUDIES: Study[] = [
   },
   {
     topic: 'Proximidade da falha',
-    takeaway: 'Chegar perto da falha importa; ir até ela em toda série não é obrigatório.',
+    takeaway: 'Não precisa ir até a falha em toda série, mas tem que chegar perto.',
     summary:
-      'Revisão com meta-análise comparando treinar até a falha com parar um pouco antes. Com o volume igual, os ganhos de massa foram parecidos, o que sugere que deixar 1 ou 2 repetições na reserva já entrega quase tudo.',
+      'Revisão com meta-análise comparando treinar até a falha com parar um pouco antes. Com o volume igual, os ganhos de massa foram parecidos, então deixar 1 ou 2 repetições na reserva já resolve.',
     authors: 'Refalo et al.',
     year: 2022,
     title: 'Influence of Resistance Training Proximity-to-Failure on Skeletal Muscle Hypertrophy: A Systematic Review with Meta-analysis',
@@ -37,9 +37,9 @@ export const STUDIES: Study[] = [
   },
   {
     topic: 'Progressão',
-    takeaway: 'Subir a carga ou subir as repetições: os dois funcionam.',
+    takeaway: 'Subir a carga ou subir as repetições deu o mesmo resultado.',
     summary:
-      'Um grupo progrediu aumentando a carga e o outro aumentando as repetições com a mesma carga, por 8 semanas. A hipertrofia foi parecida nos dois. A progressão pode vir de mais peso ou de mais repetições, desde que exista.',
+      'Um grupo progrediu aumentando a carga e o outro aumentando as repetições com a mesma carga, por 8 semanas. A hipertrofia foi parecida nos dois. Dá pra progredir tanto com mais peso quanto com mais repetições.',
     authors: 'Plotkin et al.',
     year: 2022,
     title: 'Progressive overload without progressing load? The effects of load or repetition progression on muscular adaptations',
@@ -48,7 +48,7 @@ export const STUDIES: Study[] = [
   },
   {
     topic: 'Carga e repetições',
-    takeaway: 'Carga leve ou pesada gera hipertrofia parecida, se a série for perto da falha.',
+    takeaway: 'Carga leve ou pesada dá hipertrofia parecida, se a série for perto da falha.',
     summary:
       'Meta-análise comparando treinos com cargas baixas (mais repetições) e altas (menos repetições). O crescimento muscular foi parecido entre eles; a força máxima foi maior com cargas altas.',
     authors: 'Schoenfeld et al.',
@@ -59,7 +59,7 @@ export const STUDIES: Study[] = [
   },
   {
     topic: 'Volume',
-    takeaway: 'Mais séries por semana tendem a dar mais resultado, até certo ponto.',
+    takeaway: 'Mais séries por semana costumam dar mais resultado.',
     summary:
       'Meta-análise sobre o número de séries por músculo por semana. Houve uma relação de dose e resposta: cada série a mais esteve ligada a um ganho um pouco maior, e 10 ou mais séries semanais superaram menos de 5.',
     authors: 'Schoenfeld et al.',
@@ -72,7 +72,7 @@ export const STUDIES: Study[] = [
     topic: 'Frequência',
     takeaway: 'Com o mesmo volume, treinar o músculo 1 ou 3 vezes por semana dá resultado parecido.',
     summary:
-      'Revisão sobre quantas vezes por semana treinar cada músculo. Quando o volume total era igual, a frequência não fez diferença relevante. Ela serve para dividir o volume em sessões que você consegue fazer bem.',
+      'Revisão sobre quantas vezes por semana treinar cada músculo. Quando o volume total era igual, a frequência não fez diferença relevante. Ela serve mais pra dividir as séries da semana de um jeito que dê pra fazer bem.',
     authors: 'Schoenfeld et al.',
     year: 2018,
     title: 'How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency',
@@ -103,9 +103,9 @@ export const STUDIES: Study[] = [
   },
   {
     topic: 'Músculo alongado',
-    takeaway: 'Exercícios que trabalham o músculo esticado tendem a dar mais hipertrofia.',
+    takeaway: 'Treinar o músculo na posição esticada deu mais hipertrofia.',
     summary:
-      'Comparou a flexora sentada (posterior de coxa mais alongado) com a flexora deitada. A sentada gerou mais crescimento do posterior de coxa, um dos estudos que levaram à ideia de priorizar o músculo em posição alongada.',
+      'Comparou a flexora sentada (posterior de coxa mais alongado) com a flexora deitada. A sentada fez o posterior de coxa crescer mais.',
     authors: 'Maeo et al.',
     year: 2020,
     title: 'Greater Hamstrings Muscle Hypertrophy but Similar Damage Protection after Training at Long versus Short Muscle Lengths',
@@ -114,7 +114,7 @@ export const STUDIES: Study[] = [
   },
   {
     topic: 'Músculo alongado',
-    takeaway: 'Repetições parciais na parte esticada do movimento funcionaram tão bem quanto completas.',
+    takeaway: 'Meia repetição na parte esticada funcionou tão bem quanto a repetição completa.',
     summary:
       'Na cadeira extensora, fazer só a metade do movimento em que o quadríceps está alongado gerou ganhos iguais ou melhores que a amplitude completa, e melhores que parciais na parte encurtada.',
     authors: 'Pedrosa et al.',

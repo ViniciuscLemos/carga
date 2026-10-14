@@ -23,7 +23,7 @@ export function Library({ filters, onFilters }: { filters: Filters; onFilters: (
       <div className="search">
         <input
           type="search"
-          placeholder="Buscar: supino, rosca, leg press…"
+          placeholder="Buscar exercício"
           value={filters.text}
           onChange={(e) => set({ text: e.target.value })}
           aria-label="Buscar exercício"
@@ -58,7 +58,7 @@ export function Library({ filters, onFilters }: { filters: Filters; onFilters: (
         <p className="muted">Carregando exercícios…</p>
       ) : (
         <>
-          <p className="muted">{results.length} exercícios</p>
+          <p className="count">{results.length} exercícios</p>
           <ul className="list">
             {results.slice(0, shown).map((e) => (
               <li key={e.id}>
