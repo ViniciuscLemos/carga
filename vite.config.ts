@@ -14,7 +14,7 @@ export default defineConfig({
       manifest: {
         name: 'Carga',
         short_name: 'Carga',
-        description: 'Anote cargas e repetições, monte rotinas e veja cada exercício com foto.',
+        description: 'Anote cargas e repetições, monte treinos e veja como fazer cada exercício.',
         lang: 'pt-BR',
         theme_color: '#0f1216',
         background_color: '#0f1216',
