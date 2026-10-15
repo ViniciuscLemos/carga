@@ -19,6 +19,8 @@ export default defineConfig({
         theme_color: '#0f1216',
         background_color: '#0f1216',
         display: 'standalone',
+        orientation: 'portrait',
+        categories: ['health', 'fitness', 'sports'],
         start_url: '.',
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
