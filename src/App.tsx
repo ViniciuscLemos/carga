@@ -84,7 +84,8 @@ export default function App() {
         )}
       </main>
       <footer className="credits">
-        Desenhos dos exercícios: <a href="https://github.com/everkinetic/data">Everkinetic</a> (CC BY-SA 4.0)
+        Desenhos dos exercícios: <a href="https://github.com/everkinetic/data">Everkinetic</a> (CC BY-SA 4.0).{' '}
+        Código aberto no <a href="https://github.com/ViniciuscLemos/overlog">GitHub</a>.
       </footer>
     </>
   );
