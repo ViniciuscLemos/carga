@@ -13,6 +13,15 @@ export function Library({ filters, onFilters }: { filters: Filters; onFilters: (
   }, []);
 
   const results = useMemo(() => (all ? search(all, filters) : []), [all, filters]);
+  // how many exercises each muscle has with the equipment chosen, so empty ones can go
+  const perMuscle = useMemo(() => {
+    const count: Record<string, number> = {};
+    for (const e of all ?? []) {
+      if (filters.equipment && e.equipment !== filters.equipment) continue;
+      for (const m of e.primary) count[m] = (count[m] ?? 0) + 1;
+    }
+    return count;
+  }, [all, filters.equipment]);
   // a new search starts from the top of the list again
   useEffect(() => setShown(PAGE), [filters]);
 
@@ -37,8 +46,10 @@ export function Library({ filters, onFilters }: { filters: Filters; onFilters: (
           aria-label="Músculo"
         >
           <option value="">Todos os músculos</option>
-          {MUSCLE_ORDER.map((m) => (
-            <option key={m} value={m}>{MUSCLES[m]}</option>
+          {MUSCLE_ORDER.filter((m) => !all || perMuscle[m] || m === filters.muscle).map((m) => (
+            <option key={m} value={m}>
+              {MUSCLES[m]} ({perMuscle[m] ?? 0})
+            </option>
           ))}
         </select>
       </div>
