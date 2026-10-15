@@ -36,6 +36,17 @@ export const STUDIES: Study[] = [
     doi: '10.1007/s40279-022-01784-y',
   },
   {
+    topic: 'Proximidade da falha',
+    takeaway: 'Dá pra medir o esforço contando as repetições que sobraram (RIR).',
+    summary:
+      'Os autores propuseram a escala de esforço baseada em repetições na reserva, a mesma que o app usa, e mostraram que ela acompanha bem a velocidade da barra no agachamento. Quem treinava há mais tempo acertou melhor quantas repetições ainda tinha.',
+    authors: 'Zourdos et al.',
+    year: 2016,
+    title: 'Novel Resistance Training-Specific Rating of Perceived Exertion Scale Measuring Repetitions in Reserve',
+    journal: 'Journal of Strength and Conditioning Research',
+    doi: '10.1519/JSC.0000000000001049',
+  },
+  {
     topic: 'Progressão',
     takeaway: 'Subir a carga ou subir as repetições deu o mesmo resultado.',
     summary:
