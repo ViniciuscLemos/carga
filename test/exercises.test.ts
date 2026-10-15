@@ -28,6 +28,11 @@ describe('search', () => {
     expect(found.every((e) => normalize(`${e.pt} ${e.en}`).includes('supino'))).toBe(true);
   });
 
+  it('understands portuguese words in english names', () => {
+    const found = search(all, { ...none, text: 'panturrilha smith reverse' });
+    expect(found.map((e) => e.id)).toContain('smith-machine-reverse-calf-raises');
+  });
+
   it('filters by equipment and muscle', () => {
     const found = search(all, { ...none, equipment: 'cable', muscle: 'triceps' });
     expect(found.length).toBeGreaterThan(3);

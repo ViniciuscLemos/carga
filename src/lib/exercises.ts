@@ -42,6 +42,20 @@ export function loadExercises(): Promise<Exercise[]> {
   return cache;
 }
 
+// Portuguese gym words for the English names that have no translation yet:
+// "rosca halter" should still find "Dumbbell Spider Curl"
+const SYNONYMS: Record<string, string[]> = {
+  halter: ['dumbbell'], halteres: ['dumbbell'], barra: ['barbell', 'bar'], polia: ['cable'], cabo: ['cable'],
+  maquina: ['machine'], agachamento: ['squat'], supino: ['bench press', 'chest press'], rosca: ['curl'],
+  remada: ['row'], puxada: ['pull down', 'pulldown'], panturrilha: ['calf', 'calves'], elevacao: ['raise'],
+  desenvolvimento: ['shoulder press', 'military press'], afundo: ['lunge'], passada: ['lunge'],
+  terra: ['dead lift', 'deadlift'], flexora: ['leg curl'], extensora: ['leg extension'], abdominal: ['crunch'],
+  encolhimento: ['shrug'], crucifixo: ['fly', 'flys'], triceps: ['tricep'], biceps: ['bicep'],
+};
+
+const matches = (haystack: string, word: string) =>
+  haystack.includes(word) || (SYNONYMS[word] ?? []).some((s) => haystack.includes(s));
+
 export function search(all: Exercise[], filters: Filters): Exercise[] {
   const words = normalize(filters.text).split(' ').filter(Boolean);
   const found = all.filter((e) => {
@@ -50,7 +64,7 @@ export function search(all: Exercise[], filters: Filters): Exercise[] {
     if (!words.length) return true;
     // every word has to be somewhere in either name: "supino halter" or "bench dumbbell"
     const haystack = normalize(`${e.pt ?? ''} ${e.en}`);
-    return words.every((w) => haystack.includes(w));
+    return words.every((w) => matches(haystack, w));
   });
   // the well-known ones (with a Portuguese name) first, then alphabetical
   return found.sort((a, b) => Number(!a.pt) - Number(!b.pt) || displayName(a).localeCompare(displayName(b), 'pt'));
