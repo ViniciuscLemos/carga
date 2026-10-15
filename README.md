@@ -9,6 +9,7 @@ Live at https://viniciusclemos.github.io/overlog/ (on the phone, "Add to Home Sc
 <p>
   <img src="docs/library.png" alt="The exercise list with search, equipment filter and a drawing of each exercise" width="300">
   <img src="docs/exercise.png" alt="The bench press page with drawings of the start and end of the movement" width="300">
+  <img src="docs/studies.png" alt="The studies tab: what each paper found, in Portuguese, with a link to it" width="300">
 </p>
 
 ## Why
@@ -23,7 +24,7 @@ What actually makes a muscle grow is getting close to failure and adding weight 
 
 The search ignores accents and word order, so "supino halteres" and "dumbbell bench" both work, and you can filter by equipment and muscle.
 
-There's also a tab with the studies behind the app (proximity to failure, progression, volume, frequency, rest, protein), summed up in Portuguese with a link to each paper. I checked every DOI before adding it.
+There's also a tab with the studies behind the app (proximity to failure, progression, volume, frequency, rest, protein), summed up in Portuguese with a link to each paper. I checked every DOI before adding it, and the RIR scale paper the app is based on is there too.
 
 ## Next
 
