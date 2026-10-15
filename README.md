@@ -20,7 +20,7 @@ What actually makes a muscle grow is getting close to failure and adding weight 
 
 ## What it does so far
 
-269 exercises, each with a drawing of the start and end of the movement. I didn't want photos of people, and these drawings all have the same style. The common ones have the names we use in Brazilian gyms (supino reto, puxada com triângulo, remada cavalinho...) with the English name under it.
+269 exercises, each with a drawing of the start and end of the movement. I didn't want photos of people, and these drawings all have the same style. 236 of them already have the name we use in Brazilian gyms (supino reto, puxada com triângulo, remada cavalinho...) with the English name under it, and the search understands words like "rosca" or "halter" in the ones that don't yet.
 
 The search ignores accents and word order, so "supino halteres" and "dumbbell bench" both work, and you can filter by equipment and muscle.
 
