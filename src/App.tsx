@@ -18,10 +18,28 @@ function useRoute() {
   return hash.replace(/^#\/?/, '');
 }
 
+function savedFilters(): Filters {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('filters') ?? 'null');
+    if (saved && typeof saved.text === 'string') return saved;
+  } catch {
+    // nothing saved, or storage not available
+  }
+  return { text: '', equipment: null, muscle: null };
+}
+
 export default function App() {
   const route = useRoute();
   // kept here so going back from an exercise keeps the search
-  const [filters, setFilters] = useState<Filters>({ text: '', equipment: null, muscle: null });
+  const [filters, setFilters] = useState<Filters>(savedFilters);
+  // a reload (or iOS bringing the app back) keeps the search where it was
+  useEffect(() => {
+    try {
+      sessionStorage.setItem('filters', JSON.stringify(filters));
+    } catch {
+      // private mode can refuse storage; the search just starts empty next time
+    }
+  }, [filters]);
   const exercise = route.match(/^exercicio\/(.+)$/);
   const studies = route === 'estudos';
 
