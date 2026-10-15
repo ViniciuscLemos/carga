@@ -58,7 +58,17 @@ export function Library({ filters, onFilters }: { filters: Filters; onFilters: (
         <p className="muted">Carregando exercícios…</p>
       ) : (
         <>
-          <p className="count">{results.length} exercícios</p>
+          <p className="count">
+            {results.length} {results.length === 1 ? 'exercício' : 'exercícios'}
+            {(filters.text || filters.equipment || filters.muscle) && (
+              <>
+                {' · '}
+                <button type="button" className="clear" onClick={() => onFilters({ text: '', equipment: null, muscle: null })}>
+                  limpar filtros
+                </button>
+              </>
+            )}
+          </p>
           <ul className="list">
             {results.slice(0, shown).map((e) => (
               <li key={e.id}>

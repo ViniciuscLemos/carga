@@ -53,6 +53,7 @@ main { max-width: 680px; margin: 0 auto; padding: 0 16px 40px; }
 
 .muted { color: var(--muted); font-size: 14px; }
 .count { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+.clear { border: 0; background: none; padding: 0; color: var(--text); font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 
 .list { list-style: none; margin: 0; padding: 0; }
 .item {
