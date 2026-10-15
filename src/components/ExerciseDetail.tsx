@@ -30,7 +30,19 @@ export function ExerciseDetail({ id }: { id: string }) {
 
   return (
     <article className="detail">
-      <a className="back" href="#/">‹ Exercícios</a>
+      <div className="detail-top">
+        <a className="back" href="#/">‹ Exercícios</a>
+        {/* on the phone this opens the share sheet, to send the exercise to a friend */}
+        {'share' in navigator && (
+          <button
+            type="button"
+            className="clear"
+            onClick={() => navigator.share({ title: displayName(exercise), url: window.location.href }).catch(() => {})}
+          >
+            Compartilhar
+          </button>
+        )}
+      </div>
       <h2>{displayName(exercise)}</h2>
       {exercise.pt && <p className="en">{exercise.en}</p>}
 

@@ -70,6 +70,8 @@ main { max-width: 680px; margin: 0 auto; padding: 0 16px 40px; }
   background: none; color: var(--text); font: inherit; cursor: pointer;
 }
 
+.detail-top { display: flex; justify-content: space-between; align-items: baseline; }
+.detail-top .clear { font-size: 14px; color: var(--muted); }
 .back { display: inline-block; text-decoration: none; color: var(--muted); padding: 14px 0 0; font-size: 15px; }
 .detail h2 { margin: 10px 0 0; font-size: 26px; line-height: 1.2; letter-spacing: -0.4px; }
 .detail .en { color: var(--muted); margin: 2px 0 0; font-size: 14px; }
