@@ -69,6 +69,17 @@ export const STUDIES: Study[] = [
     doi: '10.1519/JSC.0000000000002200',
   },
   {
+    topic: 'Carga e repetições',
+    takeaway: 'Em gente treinada, 25 a 35 repetições ou 8 a 12 até a falha deram hipertrofia parecida.',
+    summary:
+      'Homens que já treinavam fizeram 8 semanas com carga leve (25 a 35 repetições) ou pesada (8 a 12), sempre até a falha. Os músculos cresceram de forma parecida nos dois grupos; a carga pesada ganhou mais força máxima e a leve, mais resistência.',
+    authors: 'Schoenfeld et al.',
+    year: 2015,
+    title: 'Effects of Low- vs. High-Load Resistance Training on Muscle Strength and Hypertrophy in Well-Trained Men',
+    journal: 'Journal of Strength and Conditioning Research',
+    doi: '10.1519/JSC.0000000000000958',
+  },
+  {
     topic: 'Volume',
     takeaway: 'Mais séries por semana costumam dar mais resultado.',
     summary:
