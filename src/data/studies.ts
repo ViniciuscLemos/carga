@@ -146,6 +146,17 @@ export const STUDIES: Study[] = [
     doi: '10.1080/17461391.2021.1927199',
   },
   {
+    topic: 'Músculo alongado',
+    takeaway: 'Tríceps com o braço acima da cabeça cresceu bem mais que com o braço ao lado do corpo.',
+    summary:
+      'Cada pessoa treinou um braço com extensão de cotovelo acima da cabeça (tríceps mais alongado) e o outro com o braço ao lado do corpo, por 12 semanas. O tríceps cresceu mais no braço que treinou acima da cabeça.',
+    authors: 'Maeo et al.',
+    year: 2022,
+    title: 'Triceps brachii hypertrophy is substantially greater after elbow extension training performed in the overhead versus neutral arm position',
+    journal: 'European Journal of Sport Science',
+    doi: '10.1080/17461391.2022.2100279',
+  },
+  {
     topic: 'Proteína',
     takeaway: 'Até cerca de 1,6 g de proteína por kg por dia, mais proteína ajudou a ganhar massa.',
     summary:
