@@ -5,12 +5,21 @@ import { Studies } from './components/Studies';
 import type { Filters } from './lib/exercises';
 
 // a hash router is enough here and works the same installed or in a tab
+const isList = (hash: string) => hash.replace(/^#\/?/, '') === '';
+
 function useRoute() {
   const [hash, setHash] = useState(window.location.hash);
   useEffect(() => {
+    // going back to the list lands where you were, anything else starts at the top
+    let listScroll = 0;
+    let onList = isList(window.location.hash);
     const onChange = () => {
+      if (onList) listScroll = window.scrollY;
+      onList = isList(window.location.hash);
       setHash(window.location.hash);
-      window.scrollTo(0, 0);
+      const y = onList ? listScroll : 0;
+      // after the next paint, when the list is back on the page
+      requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)));
     };
     window.addEventListener('hashchange', onChange);
     return () => window.removeEventListener('hashchange', onChange);
