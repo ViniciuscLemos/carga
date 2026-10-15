@@ -44,7 +44,7 @@ export function loadExercises(): Promise<Exercise[]> {
 
 // Portuguese gym words for the English names that have no translation yet:
 // "rosca halter" should still find "Dumbbell Spider Curl"
-const SYNONYMS: Record<string, string[]> = {
+export const SYNONYMS: Record<string, string[]> = {
   halter: ['dumbbell'], halteres: ['dumbbell'], barra: ['barbell', 'bar'], polia: ['cable'], cabo: ['cable'],
   maquina: ['machine'], agachamento: ['squat'], supino: ['bench press', 'chest press'], rosca: ['curl'],
   remada: ['row'], puxada: ['pull down', 'pulldown'], panturrilha: ['calf', 'calves'], elevacao: ['raise'],

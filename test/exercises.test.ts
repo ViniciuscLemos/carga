@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import data from '../src/data/exercises.json';
-import { normalize, search, similar, type Exercise } from '../src/lib/exercises';
+import { normalize, search, similar, SYNONYMS, type Exercise } from '../src/lib/exercises';
 import { EQUIPMENT, MUSCLES } from '../src/lib/labels';
 
 const all = data as Exercise[];
@@ -65,5 +65,14 @@ describe('similar', () => {
     expect(found.length).toBe(6);
     expect(found.every((e) => e.primary[0] === 'chest' && e.id !== 'bench-press')).toBe(true);
     expect(found[0].equipment).toBe('barbell');
+  });
+});
+
+describe('synonyms', () => {
+  it('are written the way the search compares words (no accents, lowercase)', () => {
+    for (const [word, english] of Object.entries(SYNONYMS)) {
+      expect(word).toBe(normalize(word));
+      for (const e of english) expect(e).toBe(normalize(e));
+    }
   });
 });
