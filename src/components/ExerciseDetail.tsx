@@ -14,6 +14,15 @@ export function ExerciseDetail({ id }: { id: string }) {
     });
   }, [id]);
 
+  // the tab (and the iOS app switcher) shows which exercise is open
+  useEffect(() => {
+    if (!exercise) return;
+    document.title = `${displayName(exercise)} · Overlog`;
+    return () => {
+      document.title = 'Overlog';
+    };
+  }, [exercise]);
+
   if (exercise === undefined) return <p className="muted">Carregando…</p>;
   if (exercise === null) return <p className="muted">Esse exercício não existe. <a href="#/">Voltar</a></p>;
 

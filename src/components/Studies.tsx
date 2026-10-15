@@ -1,8 +1,16 @@
+import { useEffect } from 'react';
 import { STUDIES } from '../data/studies';
 
 export function Studies() {
   // grouped by topic, in the order the topics first show up in the list
   const topics = [...new Set(STUDIES.map((s) => s.topic))];
+
+  useEffect(() => {
+    document.title = 'Estudos · Overlog';
+    return () => {
+      document.title = 'Overlog';
+    };
+  }, []);
 
   return (
     <section className="studies">
