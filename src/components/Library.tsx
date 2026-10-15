@@ -26,6 +26,9 @@ export function Library({ filters, onFilters }: { filters: Filters; onFilters: (
           placeholder="Buscar exercício"
           value={filters.text}
           onChange={(e) => set({ text: e.target.value })}
+          // "Buscar" on the phone keyboard closes it, so the list is visible again
+          onKeyDown={(e) => e.key === 'Enter' && e.currentTarget.blur()}
+          enterKeyHint="search"
           aria-label="Buscar exercício"
         />
         <select
