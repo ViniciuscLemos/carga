@@ -31,7 +31,6 @@ main { max-width: 680px; margin: 0 auto; padding: 0 16px 40px; }
 .top nav { display: flex; gap: 16px; font-size: 15px; }
 .top nav a { text-decoration: none; color: var(--muted); }
 .top nav a[aria-current] { color: var(--strong); }
-.soon { color: #4a4a4a; }
 
 .search { display: flex; gap: 8px; margin: 14px 0 6px; }
 .search input, .search select {
@@ -95,6 +94,40 @@ main { max-width: 680px; margin: 0 auto; padding: 0 16px 40px; }
 .takeaway { font-weight: 650; color: var(--strong); }
 .cite { color: var(--muted); font-size: 13px; }
 .read { color: var(--text); font-size: 14px; text-underline-offset: 3px; }
+
+/* workouts */
+.routines h2, .pick-title { margin: 18px 0 4px; font-size: 26px; letter-spacing: -0.4px; }
+.rotation { list-style: none; margin: 10px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.rotation li { display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+.routine { flex: 1; display: flex; flex-direction: column; padding: 12px 0; text-decoration: none; }
+.routine strong { font-size: 17px; }
+.routine em { font-style: normal; color: var(--muted); font-size: 13px; }
+.order { display: flex; gap: 2px; flex: none; }
+.order button {
+  width: 36px; height: 36px; border: 0; background: none; color: var(--muted); font: inherit; font-size: 16px; cursor: pointer;
+}
+.order button:disabled { opacity: 0.25; cursor: default; }
+.routine-name {
+  width: 100%; margin: 10px 0 0; padding: 4px 0; border: 0; border-bottom: 1px solid var(--line);
+  background: none; color: var(--strong); font: inherit; font-size: 26px; font-weight: 700; letter-spacing: -0.4px;
+}
+.routine-name:focus { outline: none; border-bottom-color: var(--strong); }
+.slot { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.slot-head { display: flex; align-items: center; gap: 10px; }
+.slot-head img { width: 48px; height: 48px; object-fit: contain; background: #fff; flex: none; }
+.slot-head a { flex: 1; font-weight: 650; text-decoration: none; }
+.slot-fields { display: flex; gap: 14px; margin-top: 10px; }
+.slot-fields label { display: flex; flex-direction: column; gap: 2px; color: var(--muted); font-size: 12px; }
+.slot-fields input, .slot-fields select, .note {
+  min-height: 40px; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--text);
+  font: inherit; font-size: 16px; padding: 0 2px;
+}
+.slot-fields input { width: 48px; }
+.slot-fields select option { background: var(--bg); }
+.range { display: flex; align-items: center; gap: 4px; color: var(--muted); }
+.note { width: 100%; margin-top: 6px; font-size: 14px; }
+.as-button { display: block; text-align: center; line-height: 48px; text-decoration: none; }
+.danger { margin-top: 28px; border: 0; background: none; color: #b0b0b0; font: inherit; font-size: 14px; text-decoration: underline; cursor: pointer; }
 
 .credits { max-width: 680px; margin: 0 auto; color: var(--muted); font-size: 12px; padding: 0 16px 32px; }
 

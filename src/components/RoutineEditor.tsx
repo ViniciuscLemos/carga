@@ -1,0 +1,145 @@
+import { useLiveQuery } from 'dexie-react-hooks';
+import { useEffect, useState } from 'react';
+import { db, deleteRoutine, saveRoutine } from '../lib/db';
+import { displayName, imageUrl, loadExercises, type Exercise } from '../lib/exercises';
+import { LIMITS, move, removeAt, restLabel, tidy, totalSets, type Routine, type RoutineExercise } from '../lib/routines';
+
+// 0:30 to 5:00, every 30 seconds
+const REST_OPTIONS = Array.from({ length: 10 }, (_, i) => (i + 1) * 30);
+
+export function RoutineEditor({ id }: { id: number }) {
+  const routine = useLiveQuery(() => db.routines.get(id), [id]);
+  const [byId, setById] = useState<Map<string, Exercise>>(new Map());
+  // what's on screen while typing; it goes to the database as you type (text) or when you
+  // leave a number field, so clearing "9" to type "12" doesn't get "fixed" halfway
+  const [draft, setDraft] = useState<Routine | null>(null);
+  useEffect(() => {
+    if (routine && (!draft || draft.id !== routine.id)) setDraft(routine);
+  }, [routine, draft]);
+
+  useEffect(() => {
+    loadExercises().then((all) => setById(new Map(all.map((e) => [e.id, e]))));
+  }, []);
+
+  useEffect(() => {
+    if (routine) document.title = `${routine.name} · Overlog`;
+    return () => {
+      document.title = 'Overlog';
+    };
+  }, [routine]);
+
+  if (routine === undefined || (routine && !draft)) return null;
+  if (!routine || !draft) return <p className="muted">Esse treino não existe mais. <a href="#/treinos">Voltar</a></p>;
+
+  // there's no "save" button to forget: changes go to the phone's database right away
+  const setExercises = (exercises: RoutineExercise[]) => {
+    setDraft({ ...draft, exercises });
+    saveRoutine(id, { exercises });
+  };
+  const type = (i: number, patch: Partial<RoutineExercise>) =>
+    setDraft({ ...draft, exercises: draft.exercises.map((e, j) => (j === i ? { ...e, ...patch } : e)) });
+  const settle = () => setExercises(draft.exercises.map(tidy));
+
+  async function remove() {
+    if (!window.confirm(`Apagar o ${draft!.name}? O histórico dos treinos feitos continua.`)) return;
+    await deleteRoutine(id);
+    window.location.hash = '#/treinos';
+  }
+
+  return (
+    <section className="editor">
+      <a className="back" href="#/treinos">‹ Treinos</a>
+      <input
+        className="routine-name"
+        value={draft.name}
+        aria-label="Nome do treino"
+        onChange={(e) => {
+          setDraft({ ...draft, name: e.target.value });
+          saveRoutine(id, { name: e.target.value });
+        }}
+        onBlur={(e) => {
+          if (e.target.value.trim()) return;
+          setDraft({ ...draft, name: 'Treino' });
+          saveRoutine(id, { name: 'Treino' });
+        }}
+      />
+      <p className="count">
+        {draft.exercises.length} {draft.exercises.length === 1 ? 'exercício' : 'exercícios'} · {totalSets(draft)} séries
+      </p>
+
+      <ul className="list">
+        {draft.exercises.map((item, i) => {
+          const exercise = byId.get(item.exerciseId);
+          return (
+            <li key={`${item.exerciseId}-${i}`} className="slot">
+              <div className="slot-head">
+                {exercise && <img src={imageUrl(exercise.images[0])} alt="" width={48} height={48} />}
+                <a href={`#/exercicio/${item.exerciseId}`}>{exercise ? displayName(exercise) : item.exerciseId}</a>
+                <span className="order">
+                  <button type="button" aria-label="Subir" disabled={i === 0} onClick={() => setExercises(move(draft.exercises, i, -1))}>↑</button>
+                  <button
+                    type="button"
+                    aria-label="Descer"
+                    disabled={i === draft.exercises.length - 1}
+                    onClick={() => setExercises(move(draft.exercises, i, 1))}
+                  >
+                    ↓
+                  </button>
+                  <button type="button" aria-label="Tirar do treino" onClick={() => setExercises(removeAt(draft.exercises, i))}>✕</button>
+                </span>
+              </div>
+
+              <div className="slot-fields">
+                <label>
+                  Séries
+                  <input
+                    type="number" inputMode="numeric" min={LIMITS.sets[0]} max={LIMITS.sets[1]}
+                    value={Number.isNaN(item.sets) ? '' : item.sets}
+                    onChange={(e) => type(i, { sets: e.target.valueAsNumber })}
+                    onBlur={settle}
+                  />
+                </label>
+                <label>
+                  Reps
+                  <span className="range">
+                    <input
+                      type="number" inputMode="numeric" aria-label="Repetições mínimas"
+                      value={Number.isNaN(item.repMin) ? '' : item.repMin}
+                      onChange={(e) => type(i, { repMin: e.target.valueAsNumber })}
+                      onBlur={settle}
+                    />
+                    –
+                    <input
+                      type="number" inputMode="numeric" aria-label="Repetições máximas"
+                      value={Number.isNaN(item.repMax) ? '' : item.repMax}
+                      onChange={(e) => type(i, { repMax: e.target.valueAsNumber })}
+                      onBlur={settle}
+                    />
+                  </span>
+                </label>
+                <label>
+                  Descanso
+                  <select value={item.restSeconds} onChange={(e) => setExercises(draft.exercises.map((x, j) => (j === i ? { ...x, restSeconds: Number(e.target.value) } : x)))}>
+                    {REST_OPTIONS.map((s) => (
+                      <option key={s} value={s}>{restLabel(s)}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <input
+                className="note"
+                placeholder="Nota (banco no 4, pegada fechada...)"
+                value={item.note}
+                onChange={(e) => type(i, { note: e.target.value })}
+                onBlur={settle}
+              />
+            </li>
+          );
+        })}
+      </ul>
+
+      <a className="more as-button" href={`#/treinos/${id}/adicionar`}>+ Adicionar exercício</a>
+      <button type="button" className="danger" onClick={remove}>Apagar treino</button>
+    </section>
+  );
+}

@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { ExerciseDetail } from './components/ExerciseDetail';
 import { Library } from './components/Library';
+import { RoutineEditor } from './components/RoutineEditor';
+import { Routines } from './components/Routines';
 import { Studies } from './components/Studies';
+import { db, saveRoutine } from './lib/db';
+import { addExercise } from './lib/routines';
 import type { Filters } from './lib/exercises';
 
 // a hash router is enough here and works the same installed or in a tab
@@ -51,6 +55,34 @@ export default function App() {
   }, [filters]);
   const exercise = route.match(/^exercicio\/(.+)$/);
   const studies = route === 'estudos';
+  const editing = route.match(/^treinos\/(\d+)$/);
+  const adding = route.match(/^treinos\/(\d+)\/adicionar$/);
+  const routines = route === 'treinos' || editing || adding;
+
+  // the "add to workout" search is its own, so it doesn't change the exercises tab
+  const [pickFilters, setPickFilters] = useState<Filters>({ text: '', equipment: null, muscle: null });
+
+  async function addToRoutine(routineId: number, exerciseId: string) {
+    const routine = await db.routines.get(routineId);
+    if (routine) await saveRoutine(routineId, { exercises: addExercise(routine.exercises, exerciseId) });
+    setPickFilters({ text: '', equipment: null, muscle: null });
+    window.location.hash = `#/treinos/${routineId}`;
+  }
+
+  let page;
+  if (studies) page = <Studies />;
+  else if (adding) {
+    page = (
+      <>
+        <a className="back" href={`#/treinos/${adding[1]}`}>‹ Voltar ao treino</a>
+        <h2 className="pick-title">Adicionar exercício</h2>
+        <Library filters={pickFilters} onFilters={setPickFilters} onPick={(e) => addToRoutine(Number(adding[1]), e.id)} />
+      </>
+    );
+  } else if (editing) page = <RoutineEditor id={Number(editing[1])} />;
+  else if (route === 'treinos') page = <Routines />;
+  else if (exercise) page = <ExerciseDetail id={decodeURIComponent(exercise[1])} />;
+  else page = <Library filters={filters} onFilters={setFilters} />;
 
   return (
     <>
@@ -69,19 +101,13 @@ export default function App() {
           Overlog
         </a>
         <nav>
-          <a href="#/" aria-current={exercise || studies ? undefined : 'page'}>Exercícios</a>
-          <span className="soon" title="Na próxima etapa">Treinos</span>
+          <a href="#/" aria-current={exercise || studies || routines ? undefined : 'page'}>Exercícios</a>
+          <a href="#/treinos" aria-current={routines ? 'page' : undefined}>Treinos</a>
           <a href="#/estudos" aria-current={studies ? 'page' : undefined}>Estudos</a>
         </nav>
       </header>
       <main>
-        {studies ? (
-          <Studies />
-        ) : exercise ? (
-          <ExerciseDetail id={decodeURIComponent(exercise[1])} />
-        ) : (
-          <Library filters={filters} onFilters={setFilters} />
-        )}
+        {page}
       </main>
       <footer className="credits">
         Desenhos dos exercícios: <a href="https://github.com/everkinetic/data">Everkinetic</a> (CC BY-SA 4.0).{' '}
