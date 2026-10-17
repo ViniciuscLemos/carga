@@ -120,7 +120,8 @@ export function RoutineEditor({ id }: { id: number }) {
                 <label>
                   Descanso
                   <select value={item.restSeconds} onChange={(e) => setExercises(draft.exercises.map((x, j) => (j === i ? { ...x, restSeconds: Number(e.target.value) } : x)))}>
-                    {REST_OPTIONS.map((s) => (
+                    {/* a rest outside the list (from a backup, say) still shows instead of a blank */}
+                    {(REST_OPTIONS.includes(item.restSeconds) ? REST_OPTIONS : [...REST_OPTIONS, item.restSeconds].sort((a, b) => a - b)).map((s) => (
                       <option key={s} value={s}>{restLabel(s)}</option>
                     ))}
                   </select>
