@@ -59,3 +59,12 @@ export async function moveRoutine(id: number, by: -1 | 1) {
 }
 
 export const deleteRoutine = (id: number) => db.routines.delete(id);
+
+/** A copy at the end of the rotation: Upper 2 usually starts as Upper 1 with a few swaps. */
+export async function duplicateRoutine(id: number) {
+  const source = await db.routines.get(id);
+  if (!source) return undefined;
+  const copyId = (await createRoutine(`${source.name} (cópia)`)) as number;
+  await saveRoutine(copyId, { exercises: source.exercises.map((e) => ({ ...e })) });
+  return copyId;
+}

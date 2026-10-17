@@ -1,6 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState } from 'react';
-import { db, deleteRoutine, saveRoutine } from '../lib/db';
+import { db, deleteRoutine, duplicateRoutine, saveRoutine } from '../lib/db';
 import { displayName, imageUrl, loadExercises, type Exercise } from '../lib/exercises';
 import { LIMITS, move, removeAt, restLabel, tidy, totalSets, type Routine, type RoutineExercise } from '../lib/routines';
 
@@ -140,7 +140,19 @@ export function RoutineEditor({ id }: { id: number }) {
       </ul>
 
       <a className="more as-button" href={`#/treinos/${id}/adicionar`}>+ Adicionar exercício</a>
-      <button type="button" className="danger" onClick={remove}>Apagar treino</button>
+      <div className="editor-actions">
+        <button
+          type="button"
+          className="danger"
+          onClick={async () => {
+            const copy = await duplicateRoutine(id);
+            if (copy) window.location.hash = `#/treinos/${copy}`;
+          }}
+        >
+          Duplicar treino
+        </button>
+        <button type="button" className="danger" onClick={remove}>Apagar treino</button>
+      </div>
     </section>
   );
 }
