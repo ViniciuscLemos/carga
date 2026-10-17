@@ -86,3 +86,12 @@ export function suggestName(taken: string[]) {
 
 export const restLabel = (seconds: number) =>
   `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+
+/** Sets per main muscle, biggest first: the number that matters for volume, not kilos. */
+export function setsPerMuscle(exercises: RoutineExercise[], primaryOf: (exerciseId: string) => string[] | undefined) {
+  const count = new Map<string, number>();
+  for (const item of exercises) {
+    for (const muscle of primaryOf(item.exerciseId) ?? []) count.set(muscle, (count.get(muscle) ?? 0) + item.sets);
+  }
+  return [...count].sort((a, b) => b[1] - a[1]);
+}

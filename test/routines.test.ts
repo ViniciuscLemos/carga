@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  addExercise, DEFAULTS, move, nextInRotation, removeAt, restLabel, suggestName, tidy, totalSets, updateAt,
+  addExercise, DEFAULTS, move, setsPerMuscle, nextInRotation, removeAt, restLabel, suggestName, tidy, totalSets, updateAt,
 } from '../src/lib/routines';
 
 describe('routine editing', () => {
@@ -57,5 +57,17 @@ describe('names and labels', () => {
   it('writes rest as minutes and seconds', () => {
     expect(restLabel(180)).toBe('3:00');
     expect(restLabel(90)).toBe('1:30');
+  });
+});
+
+describe('sets per muscle', () => {
+  it('adds up the sets of every exercise for its main muscles, biggest first', () => {
+    const primary: Record<string, string[]> = { bench: ['chest'], fly: ['chest'], pushdown: ['triceps'] };
+    const list = [
+      { exerciseId: 'bench', ...DEFAULTS, sets: 3 },
+      { exerciseId: 'pushdown', ...DEFAULTS },
+      { exerciseId: 'fly', ...DEFAULTS },
+    ];
+    expect(setsPerMuscle(list, (id) => primary[id])).toEqual([['chest', 5], ['triceps', 2]]);
   });
 });

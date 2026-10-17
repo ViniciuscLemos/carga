@@ -2,7 +2,8 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState } from 'react';
 import { db, deleteRoutine, duplicateRoutine, saveRoutine } from '../lib/db';
 import { displayName, imageUrl, loadExercises, type Exercise } from '../lib/exercises';
-import { LIMITS, move, removeAt, restLabel, tidy, totalSets, type Routine, type RoutineExercise } from '../lib/routines';
+import { MUSCLES } from '../lib/labels';
+import { LIMITS, move, removeAt, restLabel, setsPerMuscle, tidy, totalSets, type Routine, type RoutineExercise } from '../lib/routines';
 
 // 0:30 to 5:00, every 30 seconds
 const REST_OPTIONS = Array.from({ length: 10 }, (_, i) => (i + 1) * 30);
@@ -140,6 +141,15 @@ export function RoutineEditor({ id }: { id: number }) {
       </ul>
 
       <a className="more as-button" href={`#/treinos/${id}/adicionar`}>+ Adicionar exercício</a>
+
+      {draft.exercises.length > 0 && byId.size > 0 && (
+        <p className="per-muscle">
+          Séries por músculo:{' '}
+          {setsPerMuscle(draft.exercises, (exerciseId) => byId.get(exerciseId)?.primary)
+            .map(([muscle, sets]) => `${MUSCLES[muscle] ?? muscle} ${sets}`)
+            .join(' · ')}
+        </p>
+      )}
       <div className="editor-actions">
         <button
           type="button"
