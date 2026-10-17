@@ -1,13 +1,8 @@
 // Everything the user writes stays on the phone, in IndexedDB.
-// Only the tables for now: routines and workouts come in the next step.
 import Dexie, { type EntityTable } from 'dexie';
+import type { Routine } from './routines';
 
-export interface Routine {
-  id?: number;
-  name: string; // "Treino A", "Push", "Pernas"...
-  exercises: { exerciseId: string; sets: number; reps: string; restSeconds: number }[];
-  createdAt: number;
-}
+export type { Routine };
 
 export interface Workout {
   id?: number;
@@ -38,3 +33,29 @@ db.version(1).stores({
   // [exerciseId+doneAt] answers "what did I do last time on this exercise"
   sets: '++id, workoutId, exerciseId, [exerciseId+doneAt]',
 });
+
+// workouts are kept in the order of the rotation
+db.version(2).stores({ routines: '++id, position' });
+
+export async function createRoutine(name: string) {
+  const last = await db.routines.orderBy('position').last();
+  const now = Date.now();
+  return db.routines.add({ name, position: (last?.position ?? -1) + 1, exercises: [], createdAt: now, updatedAt: now });
+}
+
+export const saveRoutine = (id: number, changes: Partial<Routine>) =>
+  db.routines.update(id, { ...changes, updatedAt: Date.now() });
+
+/** Swaps a workout with its neighbour in the rotation. */
+export async function moveRoutine(id: number, by: -1 | 1) {
+  await db.transaction('rw', db.routines, async () => {
+    const all = await db.routines.orderBy('position').toArray();
+    const i = all.findIndex((r) => r.id === id);
+    const j = i + by;
+    if (i < 0 || j < 0 || j >= all.length) return;
+    await db.routines.update(all[i].id!, { position: all[j].position });
+    await db.routines.update(all[j].id!, { position: all[i].position });
+  });
+}
+
+export const deleteRoutine = (id: number) => db.routines.delete(id);
