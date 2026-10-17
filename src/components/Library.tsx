@@ -4,7 +4,14 @@ import { EQUIPMENT, EQUIPMENT_ORDER, MUSCLES, MUSCLE_ORDER } from '../lib/labels
 
 const PAGE = 40;
 
-export function Library({ filters, onFilters }: { filters: Filters; onFilters: (f: Filters) => void }) {
+interface Props {
+  filters: Filters;
+  onFilters: (f: Filters) => void;
+  /** when set, tapping an exercise picks it (adding to a workout) instead of opening its page */
+  onPick?: (exercise: Exercise) => void;
+}
+
+export function Library({ filters, onFilters, onPick }: Props) {
   const [all, setAll] = useState<Exercise[] | null>(null);
   const [shown, setShown] = useState(PAGE);
 
@@ -86,7 +93,14 @@ export function Library({ filters, onFilters }: { filters: Filters; onFilters: (
           <ul className="list">
             {results.slice(0, shown).map((e) => (
               <li key={e.id}>
-                <a className="item" href={`#/exercicio/${e.id}`}>
+                <a
+                  className="item"
+                  href={onPick ? undefined : `#/exercicio/${e.id}`}
+                  role={onPick ? 'button' : undefined}
+                  tabIndex={onPick ? 0 : undefined}
+                  onClick={onPick ? () => onPick(e) : undefined}
+                  onKeyDown={onPick ? (ev) => ev.key === 'Enter' && onPick(e) : undefined}
+                >
                   <img src={imageUrl(e.images[0])} alt="" loading="lazy" width={72} height={72} />
                   <span>
                     <strong>{displayName(e)}</strong>
