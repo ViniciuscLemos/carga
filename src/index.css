@@ -80,6 +80,9 @@ main { max-width: 680px; margin: 0 auto; padding: 0 16px 40px; }
 .photos figure { margin: 0; }
 .photos img { width: 100%; aspect-ratio: 1; object-fit: contain; padding: 8px; background: #fff; display: block; }
 .photos figcaption { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.add-to { margin: 0 0 14px; }
+.add-to select { min-height: 40px; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--text); font: inherit; }
+.add-to select option { background: var(--bg); }
 .facts { display: grid; grid-template-columns: 110px 1fr; margin: 0 0 20px; border-top: 1px solid var(--line); }
 .facts dt, .facts dd { margin: 0; padding: 8px 0; border-bottom: 1px solid var(--line); }
 .facts dt { color: var(--muted); }

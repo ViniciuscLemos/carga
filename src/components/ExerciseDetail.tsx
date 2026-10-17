@@ -1,10 +1,15 @@
+import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState } from 'react';
+import { db, saveRoutine } from '../lib/db';
+import { addExercise } from '../lib/routines';
 import { displayName, imageUrl, loadExercises, similar, type Exercise } from '../lib/exercises';
 import { EQUIPMENT, MECHANICS, MUSCLES } from '../lib/labels';
 
 export function ExerciseDetail({ id }: { id: string }) {
   const [exercise, setExercise] = useState<Exercise | null | undefined>(undefined);
   const [others, setOthers] = useState<Exercise[]>([]);
+  const routines = useLiveQuery(() => db.routines.orderBy('position').toArray());
+  const [added, setAdded] = useState('');
 
   useEffect(() => {
     loadExercises().then((all) => {
@@ -55,6 +60,27 @@ export function ExerciseDetail({ id }: { id: string }) {
           </figure>
         ))}
       </div>
+
+      {routines && routines.length > 0 && (
+        <p className="add-to">
+          <select
+            value=""
+            aria-label="Adicionar a um treino"
+            onChange={async (e) => {
+              const routine = routines.find((r) => r.id === Number(e.target.value));
+              if (!routine) return;
+              await saveRoutine(routine.id!, { exercises: addExercise(routine.exercises, exercise.id) });
+              setAdded(routine.name);
+            }}
+          >
+            <option value="">+ Adicionar a um treino</option>
+            {routines.map((r) => (
+              <option key={r.id} value={r.id}>{r.name}</option>
+            ))}
+          </select>
+          {added && <span className="muted"> Adicionado ao {added}.</span>}
+        </p>
+      )}
 
       <dl className="facts">
         <dt>Equipamento</dt>
