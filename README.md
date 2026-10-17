@@ -24,11 +24,13 @@ What actually makes a muscle grow is getting close to failure and adding weight 
 
 The search ignores accents and word order, so "supino halteres" and "dumbbell bench" both work, and you can filter by equipment and muscle.
 
+The Workouts tab is where you set up your split: as many workouts as you want, in the order you do them. They rotate (after the last one comes the first again) instead of being tied to days of the week, so a 4-day upper/lower doesn't have to fit Monday to Thursday. Each exercise starts at 2 sets of 5 to 9 reps with 3 minutes of rest, and everything can be changed, with a note for things like seat height. At the bottom it adds up the sets per muscle, and a workout can be copied to start the next one.
+
 There's also a tab with the studies behind the app (proximity to failure, progression, volume, frequency, rest, protein), summed up in Portuguese with a link to each paper. I checked every DOI before adding it, and the RIR scale paper the app is based on is there too.
 
 ## Next
 
-Workouts (as many as you want), logging a workout with weight, reps and RIR, a suggestion of what to do next time, history and a chart per exercise. After that, rest timer, your own exercises and backup.
+Logging a workout with weight, reps and RIR, a suggestion of what to do next time, history and a chart per exercise. After that, rest timer, your own exercises and backup.
 
 The exercises that don't have a drawing (wide-grip pulldown, hip thrust...) will come in with a black and white muscle map in the same line style, so the pictures keep looking the same.
 
