@@ -57,7 +57,12 @@ export function Routines() {
         ))}
       </ol>
 
-      {routines.length === 0 && <p className="muted">Nenhum treino ainda.</p>}
+      {routines.length === 0 && (
+        <p className="muted">
+          Nenhum treino ainda. Cria um pra cada dia da sua divisão (Upper 1, Lower 1, Upper 2...) e coloca na ordem em
+          que você faz.
+        </p>
+      )}
       <button type="button" className="more" onClick={newRoutine}>
         + Novo treino
       </button>
