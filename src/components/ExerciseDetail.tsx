@@ -10,6 +10,8 @@ export function ExerciseDetail({ id }: { id: string }) {
   const [others, setOthers] = useState<Exercise[]>([]);
   const routines = useLiveQuery(() => db.routines.orderBy('position').toArray());
   const [added, setAdded] = useState('');
+  // opening another exercise from "Parecidos" shouldn't keep the last message
+  useEffect(() => setAdded(''), [id]);
 
   useEffect(() => {
     loadExercises().then((all) => {
