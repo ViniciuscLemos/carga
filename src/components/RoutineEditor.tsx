@@ -86,7 +86,14 @@ export function RoutineEditor({ id }: { id: number }) {
                   >
                     ↓
                   </button>
-                  <button type="button" aria-label="Tirar do treino" onClick={() => setExercises(removeAt(draft.exercises, i))}>✕</button>
+                  <button type="button" aria-label="Tirar do treino" onClick={() => {
+                      // the ✕ is small and next to the arrows: easy to hit by accident on the phone
+                      const name = exercise ? displayName(exercise) : 'esse exercício';
+                      if (window.confirm(`Tirar ${name} do treino?`)) setExercises(removeAt(draft.exercises, i));
+                    }}
+                  >
+                    ✕
+                  </button>
                 </span>
               </div>
 
